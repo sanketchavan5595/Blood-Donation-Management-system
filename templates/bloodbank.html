@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Blood Bank
+{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">bankID</th>
+      <th scope="col">Location</th>
+      <th scope="col">BankName</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for bb in bloodbank %}
+    <tr>
+      <th scope="row">{{bb.bankid}}</th>
+      <td>{{bb.location}}</td>
+      <td>{{bb.bankname}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock body %}
