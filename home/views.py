@@ -1,21 +1,24 @@
 # from django.http.response import HttpResponse
 from django.db.models.query import RawQuerySet
-from django.shortcuts import render, HttpResponse
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import redirect, render, HttpResponse, get_object_or_404
 from home.models import Bloodbank, Donor, Hospital, Patient, Blood, Orders
-import mysql.connector
+from home.forms import PatientForm, BloodbankForm, HospitalForm, DonorForm, BloodForm
+# import mysql.connector
 
-conn = mysql.connector.connect(
-    host = 'localhost',
-    user = 'root',
-    password = '7387479297',
-    database = 'dbmsminiproject'
-)
+# conn = mysql.connector.connect(
+#     host = 'localhost',
+#     user = 'root',
+#     password = '7387479297',
+#     database = 'dbmsminiproject'
+# )
 
 # Create your views here.
 def index(request):
     # return HttpResponse('this is homepage')
     return render(request=request, template_name='index.html')
 
+# bloodbank operations
 def bloodbank(request):
     bloodbank = Bloodbank.objects.all()
     context = {
@@ -29,9 +32,32 @@ def bloodbank(request):
     # return HttpResponse('this is homepage')
     return render(request=request, template_name='bloodbank.html', context=context)
 
+def updateBloodbank(request, pk):
+    b = Bloodbank.objects.get(bankid = pk)
+    form = BloodbankForm(instance=b)
+    context = {
+        'form': form
+    }
+
+    if request.method == 'POST':
+        form = BloodbankForm(request.POST, instance=b)
+        if form.is_valid():
+            form.save()
+            return redirect('/bloodbank')
+
+    return render(request=request, template_name='updateBloodbank.html', context=context)
+
+def deleteBloodbank(request, pk):
+    p = Bloodbank.objects.get(bankid = pk)
+    if request.method == "POST":
+        p.delete()
+        return redirect('/bloodbank')
+
+    context = {'item': p}
+    return render(request=request, template_name='deleteBloodbank.html', context=context)
 
         
-
+# hospital operations 
 def hospital(request):
     hospital = Hospital.objects.all()
     context = {
@@ -45,7 +71,32 @@ def hospital(request):
     # return HttpResponse('this is homepage')
     return render(request=request, template_name='hospital.html', context=context)
 
+def updateHospital(request, pk):
+    b = Hospital.objects.get(hospitalid = pk)
+    form = HospitalForm(instance=b)
+    context = {
+        'form': form
+    }
 
+    if request.method == 'POST':
+        form = HospitalForm(request.POST, instance=b)
+        if form.is_valid():
+            form.save()
+            return redirect('/hospital')
+
+    return render(request=request, template_name='updateHospital.html', context=context)
+
+def deleteHospital(request, pk):
+    p = Hospital.objects.get(hospitalid = pk)
+    if request.method == "POST":
+        p.delete()
+        return redirect('/hospital')
+
+    context = {'item': p}
+    return render(request=request, template_name='deleteHospital.html', context=context)
+
+
+# donor operations 
 def donor(request):
     donor = Donor.objects.all()
     context = {
@@ -66,7 +117,32 @@ def donor(request):
     # return HttpResponse('this is homepage')
     return render(request=request, template_name='donor.html', context=context)
 
+def updateDonor(request, pk):
+    b = Donor.objects.get(donorid = pk)
+    form = DonorForm(instance=b)
+    context = {
+        'form': form
+    }
 
+    if request.method == 'POST':
+        form = DonorForm(request.POST, instance=b)
+        if form.is_valid():
+            form.save()
+            return redirect('/donor')
+
+    return render(request=request, template_name='updateDonor.html', context=context)
+
+def deleteDonor(request, pk):
+    p = Donor.objects.get(donorid = pk)
+    if request.method == "POST":
+        p.delete()
+        return redirect('/donor')
+
+    context = {'item': p}
+    return render(request=request, template_name='deleteDonor.html', context=context)
+
+
+# Blood operations 
 def blood(request):
     blood = Blood.objects.all()
     context = {
@@ -84,6 +160,32 @@ def blood(request):
 
     return render(request=request, template_name='blood.html', context=context)
 
+def updateBlood(request, pk):
+    b = Blood.objects.get(bloodid = pk)
+    form = BloodForm(instance=b)
+    context = {
+        'form': form
+    }
+
+    if request.method == 'POST':
+        form = BloodForm(request.POST, instance=b)
+        if form.is_valid():
+            form.save()
+            return redirect('/blood')
+
+    return render(request=request, template_name='updateBlood.html', context=context)
+
+def deleteBlood(request, pk):
+    p = Blood.objects.get(bloodid = pk)
+    if request.method == "POST":
+        p.delete()
+        return redirect('/blood')
+
+    context = {'item': p}
+    return render(request=request, template_name='deleteBlood.html', context=context)
+
+
+# Patient Operations 
 def patient(request):
     patient = Patient.objects.all()
     context = {
@@ -102,13 +204,26 @@ def patient(request):
         p.save()
     return render(request=request, template_name='patient.html', context=context)
 
-def mysqltrial(request):
-    cursor = conn.cursor()
-    sql = 'select * from bloodbank'
-    cursor.execute(sql)
-    rows = cursor.fetchall()
+def updatePatient(request, pk):
+    p = Patient.objects.get(patientid = pk)
+    form = PatientForm(instance=p)
     context = {
-        'rows': rows
+        'form': form
     }
 
-    return render(request=request, template_name='mysqltrial.html', context=context)
+    if request.method == 'POST':
+        form = PatientForm(request.POST, instance=p)
+        if form.is_valid():
+            form.save()
+            return redirect('/patient')
+
+    return render(request=request, template_name='updatePatient.html', context=context)
+
+def deletePatient(request, pk):
+    p = Patient.objects.get(patientid = pk)
+    if request.method == "POST":
+        p.delete()
+        return redirect('/patient')
+
+    context = {'item': p}
+    return render(request=request, template_name='deletePatient.html', context=context)

@@ -1,39 +1,44 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Home
+Blood
 {% endblock title %}
 
 {% block body %}
 
 <div class="container">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Blood ID</th>
-          <th scope="col">Blood Type</th>
-          <th scope="col">Bank Name</th>
-          <th scope="col">Donor Name</th>
-        </tr>
-      </thead>
-    
-      <tbody>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Blood ID</th>
+        <th scope="col">Blood Type</th>
+        <th scope="col">Bank Name</th>
+        <th scope="col">Donor Name</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
       {% for row in blood %}
-        <tr>
-          <th scope="row">{{row.bloodid}}</th>
-          <td>{{row.bloodtype}}</td>
-          <td>{{row.bankid}}</td>
-          <td>{{row.donorid}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    
-    <hr>
-    
-    <section class="text-gray-600 body-font relative">
-      <form action="/blood" method="post">
-        {% csrf_token %}
+      <tr>
+        <th scope="row">{{row.bloodid}}</th>
+        <td>{{row.bloodtype}}</td>
+        <td>{{row.bankid}}</td>
+        <td>{{row.donorid}}</td>
+        <td><button type="button" class="btn btn-danger"><a href={% url 'updateBlood' row.bloodid %}>Update</a></button></td>
+        <td><button type="button" class="btn btn-warning"><a href={% url 'deleteBlood' row.bloodid %}>Delete</a></button></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <hr>
+
+  <section class="text-gray-600 body-font relative">
+    <form action="/blood" method="post">
+      {% csrf_token %}
       <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-col text-center w-full mb-12">
           <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Insert Operation</h1>
@@ -43,7 +48,9 @@ Home
             <div class="p-2 w-1/2">
               <div class="relative">
                 <label for="name" class="leading-7 text-sm text-gray-600">Blood Type</label>
-                <input type="text" id="bloodtype" name="bloodtype" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" list="blood-types">
+                <input type="text" id="bloodtype" name="bloodtype"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  list="blood-types">
                 <datalist id="blood-types">
                   <option value="O+"></option>
                   <option value="O-"></option>
@@ -60,26 +67,32 @@ Home
             <div class="p-2 w-1/2">
               <div class="relative">
                 <label for="text" class="leading-7 text-sm text-gray-600">Bank ID</label>
-                <input type="number" id="bankid" name="bankid" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" min="1" step="1" max = {{ maxBankCount }}>
+                <input type="number" id="bankid" name="bankid"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  min="1" step="1" max={{ maxBankCount }}>
               </div>
             </div>
             <div class="p-2 w-1/2">
               <div class="relative">
                 <label for="text" class="leading-7 text-sm text-gray-600">Donor ID</label>
-                <input type="number" id="donorid" name="donorid" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" min="1" step="1" max={{maxDonorCount}}>
+                <input type="number" id="donorid" name="donorid"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  min="1" step="1" max={{maxDonorCount}}>
               </div>
             </div>
             <div class="p-2 w-full">
-              <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit">Submit</button>
+              <button
+                class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                type="submit">Submit</button>
             </div>
           </div>
         </div>
       </div>
     </form>
-    </section>
-    
-    
-    
-    </div>
+  </section>
+
+
+
+</div>
 
 {% endblock body %}

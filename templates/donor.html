@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Home
+Donor
 {% endblock title %}
 
 {% block body %}
@@ -18,6 +18,8 @@ Home
         <th scope="col">Age</th>
         <th scope="col">Phone Number</th>
         <th scope="col">Bank Name</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
       </tr>
     </thead>
 
@@ -31,6 +33,8 @@ Home
         <td>{{row.age}}</td>
         <td>{{row.phonenumber}}</td>
         <td>{{row.bankid}}</td>
+        <td><button type="button" class="btn btn-danger"><a href={% url 'updateDonor' row.donorid %}>Update</a></button></td>
+        <td><button type="button" class="btn btn-warning"><a href={% url 'deleteDonor' row.donorid %}>Delete</a></button></td>
       </tr>
       {% endfor %}
     </tbody>
@@ -65,7 +69,8 @@ Home
               <div class="relative">
                 <label for="text" class="leading-7 text-sm text-gray-600">Gender (M = Male, F = Female</label>
                 <input type="text" id="bankName" name="gender"
-                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" list="gender-options">
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  list="gender-options">
 
                 <datalist id="gender-options">
                   <option value="M">
