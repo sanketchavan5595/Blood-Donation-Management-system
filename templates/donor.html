@@ -6,6 +6,116 @@ Home
 
 {% block body %}
 
-this is donor page
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Donor ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Age</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Bank Name</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for row in donor %}
+      <tr>
+        <th scope="row">{{row.donorid}}</th>
+        <td>{{row.firstname}}</td>
+        <td>{{row.lastname}}</td>
+        <td>{{row.gender}}</td>
+        <td>{{row.age}}</td>
+        <td>{{row.phonenumber}}</td>
+        <td>{{row.bankid}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <hr>
+
+  <section class="text-gray-600 body-font relative">
+    <form action="/donor" method="post">
+      {% csrf_token %}
+      <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full mb-12">
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Insert Operation</h1>
+        </div>
+        <div class="lg:w-1/2 md:w-2/3 mx-auto">
+          <div class="flex flex-wrap -m-2">
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="name" class="leading-7 text-sm text-gray-600">First Name</label>
+                <input type="text" id="location" name="firstname"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="name" class="leading-7 text-sm text-gray-600">Last Name</label>
+                <input type="text" id="location" name="lastname"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="text" class="leading-7 text-sm text-gray-600">Gender (M = Male, F = Female</label>
+                <input type="text" id="bankName" name="gender"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" list="gender-options">
+
+                <datalist id="gender-options">
+                  <option value="M">
+                  <option value="F">
+                </datalist>
+
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="text" class="leading-7 text-sm text-gray-600">Age</label>
+                <input type="number" id="bankName" name="age"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  min="18">
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="text" class="leading-7 text-sm text-gray-600">Phone Number</label>
+                <input type="text" id="bankName" name="phonenumber"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="text" class="leading-7 text-sm text-gray-600">Bank ID</label>
+                <input type="number" id="bankName" name="bankid"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  min="1" step="1" max={{ max_id }}>
+              </div>
+            </div>
+            <div class="p-2 w-full">
+              <button
+                class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                type="submit">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+
+
+
+</div>
+
+
+
+
+
+
 
 {% endblock body %}

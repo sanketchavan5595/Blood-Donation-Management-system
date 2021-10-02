@@ -8,5 +8,6 @@ urlpatterns = [
     path('donor', views.donor, name='donor'),
     path('blood', views.blood, name='blood'),
     path('patient', views.patient, name='patient'),
+    path('mysqltrial', views.mysqltrial, name='mysqltrial'),
 
 ]

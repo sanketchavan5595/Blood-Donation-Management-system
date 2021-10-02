@@ -6,6 +6,110 @@ Patient
 
 {% block body %}
 
-this is patient page
+<div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Patient ID</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Patient Blood Type</th>
+          <th scope="col">Hospital</th>
+        </tr>
+      </thead>
+    
+      <tbody>
+      {% for row in patient %}
+        <tr>
+          <th scope="row">{{row.patientid}}</th>
+          <td>{{row.firstname}}</td>
+          <td>{{row.lastname}}</td>
+          <td>{{row.age}}</td>
+          <td>{{row.gender}}</td>
+          <td>{{row.pbloodtype}}</td>
+          <td>{{row.hospitalid}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+    <hr>
+    
+    <section class="text-gray-600 body-font relative">
+      <form action="/patient" method="post">
+        {% csrf_token %}
+      <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full mb-12">
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Insert Operation</h1>
+        </div>
+        <div class="lg:w-1/2 md:w-2/3 mx-auto">
+          <div class="flex flex-wrap -m-2">
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="name" class="leading-7 text-sm text-gray-600">First Name</label>
+                <input type="text" id="firstname" name="firstname" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="name" class="leading-7 text-sm text-gray-600">Last Name</label>
+                <input type="text" id="lastname" name="lastname" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="name" class="leading-7 text-sm text-gray-600">Age</label>
+                <input type="number" id="age" name="age" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="name" class="leading-7 text-sm text-gray-600">Gender</label>
+                <input type="text" id="gender" name="gender" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" list="gender-options">
+
+                <datalist id="gender-options">
+                  <option value="M">
+                  <option value="F">
+                </datalist>
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="name" class="leading-7 text-sm text-gray-600">Blood Type</label>
+                <input type="text" id="pbloodtype" name="pbloodtype" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" list="blood-types">
+
+                <datalist id="blood-types">
+                  <option value="O+"></option>
+                  <option value="O-"></option>
+                  <option value="A+"></option>
+                  <option value="A-"></option>
+                  <option value="B+"></option>
+                  <option value="B-"></option>
+                  <option value="AB+"></option>
+                  <option value="AB-"></option>
+                </datalist>
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="name" class="leading-7 text-sm text-gray-600">Hospital ID</label>
+                <input type="number" id="hospitalid" name="hospitalid" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" min="1" max={{maxHospitalCount}}>
+              </div>
+            </div>
+            
+            <div class="p-2 w-full">
+              <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    </section>
+    
+    
+    
+    </div>
 
 {% endblock body %}
