@@ -55,14 +55,14 @@ Donor
               <div class="relative">
                 <label for="name" class="leading-7 text-sm text-gray-600">First Name</label>
                 <input type="text" id="location" name="firstname"
-                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" pattern="[A-Za-z]+" title="first name should be a string">
               </div>
             </div>
             <div class="p-2 w-1/2">
               <div class="relative">
                 <label for="name" class="leading-7 text-sm text-gray-600">Last Name</label>
                 <input type="text" id="location" name="lastname"
-                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" pattern="[A-Za-z]+" title="Last name should be a string">
               </div>
             </div>
             <div class="p-2 w-1/2">
@@ -90,8 +90,8 @@ Donor
             <div class="p-2 w-1/2">
               <div class="relative">
                 <label for="text" class="leading-7 text-sm text-gray-600">Phone Number</label>
-                <input type="text" id="bankName" name="phonenumber"
-                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                <input type="text" id="phonenumber" name="phonenumber"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" pattern="[7-9]{1}[0-9]{9}" title="Enter proper phone number: should start with 7,8 or 9 and must be 10 digits long">
               </div>
             </div>
             <div class="p-2 w-1/2">

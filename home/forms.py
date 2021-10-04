@@ -7,8 +7,8 @@ class PatientForm(forms.ModelForm):
         model = Patient
 
         genderChoices = (
-            ("Male", "M"),
-            ("Female", "F"),
+            ("M", "M"),
+            ("F", "F"),
         )
 
         bloodgroupChoices = (
@@ -26,6 +26,8 @@ class PatientForm(forms.ModelForm):
         widgets = {
             'gender': forms.Select(choices=genderChoices),
             'pbloodtype': forms.Select(choices=bloodgroupChoices),
+            'firstname': forms.TextInput(attrs={'pattern':"[A-Za-z]+"}),
+            'lastname': forms.TextInput(attrs={'pattern':"[A-Za-z]+"})
         }
 
 class BloodbankForm(forms.ModelForm):
@@ -34,11 +36,21 @@ class BloodbankForm(forms.ModelForm):
 
         fields = "__all__"
 
+        widgets = {
+            'location': forms.TextInput(attrs={'pattern':"[A-Za-z]+"}),
+            'bankname': forms.TextInput(attrs={'pattern':"[A-Za-z]+"}),
+        }
+
 class HospitalForm(forms.ModelForm):
     class Meta:
         model = Hospital
 
         fields = "__all__"
+
+        widgets = {
+            'location': forms.TextInput(attrs={'pattern':"[A-Za-z]+"}),
+            'hospitalname': forms.TextInput(attrs={'pattern':"[A-Za-z]+"}),
+        }
 
 class DonorForm(forms.ModelForm):
     class Meta:
@@ -47,13 +59,16 @@ class DonorForm(forms.ModelForm):
         fields = "__all__"
 
         genderChoices = (
-            ("Male", "M"),
-            ("Female", "F"),
+            ("M", "M"),
+            ("F", "F"),
         )
 
         widgets = {
             'gender': forms.Select(choices=genderChoices),
-            'age': forms.NumberInput(attrs={'min':18,'max': '60','type': 'number'})
+            'age': forms.NumberInput(attrs={'min':18,'max': '60','type': 'number'}),
+            'firstname': forms.TextInput(attrs={'pattern':"[A-Za-z]+"}),
+            'lastname': forms.TextInput(attrs={'pattern':"[A-Za-z]+"}),
+            'phonenumber': forms.TextInput(attrs={'pattern':"[7-9]{1}[0-9]{9}"})
         }
 
 
