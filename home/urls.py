@@ -3,6 +3,8 @@ from django.urls import path
 from home import views
 urlpatterns = [
     path('', views.index, name='home'),
+    path('loginPage', views.loginPage, name='loginPage'),
+    path('logoutUser', views.logoutUser, name='logoutUser'),
 
     path('bloodbank', views.bloodbank, name='bloodbank'),
     path('updateBloodbank/<int:pk>/', views.updateBloodbank, name='updateBloodbank'),

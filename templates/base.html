@@ -29,6 +29,8 @@
             <a class="mr-5 hover:text-white" href="/donor">Donor</a>
             <a class="mr-5 hover:text-white" href="/blood">Blood</a>
             <a class="mr-5 hover:text-white" href="/patient">Patients</a>
+            <span class="ml-3 text-xl">Hello, {{ request.user }} <a class="mr-5 hover:text-white" href={% url 'logoutUser' %}>Logout</a></span>
+            
           </nav>
         </div>
       </header>

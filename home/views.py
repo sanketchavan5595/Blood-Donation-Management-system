@@ -2,18 +2,34 @@
 from django.db.models.query import RawQuerySet
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render, HttpResponse, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from home.models import Bloodbank, Donor, Hospital, Patient, Blood, Orders
 from home.forms import PatientForm, BloodbankForm, HospitalForm, DonorForm, BloodForm
-# import mysql.connector
-
-# conn = mysql.connector.connect(
-#     host = 'localhost',
-#     user = 'root',
-#     password = '7387479297',
-#     database = 'dbmsminiproject'
-# )
 
 # Create your views here.
+def loginPage(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request=request, username = username, password = password)
+
+        if user is not None:
+            login(request=request, user=user)
+            return redirect('home')
+        else:
+            messages.info(request=request, message="Username or password incorrect")
+
+    return render(request=request, template_name='login.html')
+
+def logoutUser(request):
+    logout(request=request)
+    return redirect('loginPage')
+
+@login_required(login_url='loginPage')
 def index(request):
     # return HttpResponse('this is homepage')
     return render(request=request, template_name='index.html')
