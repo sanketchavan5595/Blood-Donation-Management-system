@@ -18,7 +18,7 @@ All the constraints have been properly applied to ensure the integrity of the da
 
 ### Diagrams
 #### Database Design
-![ER Diagram](static\Final_ER_diagram.png)
+![ER Diagram](https://github.com/sanketchavan5595/Blood-Donation-Management-system/blob/master/static/Final_ER_diagram.png)
 ---
 #### Database schema
 ![Schema Diagram](static\Final_schema_diagram.png)
